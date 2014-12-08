@@ -48,7 +48,7 @@ function processData(csv) {
       continue;
     }
     if(allData[2]) {
-      words = allData[2].split(/[\s\*\/\"\#\-\'\.]+/); category = 'MISC';
+      words = allData[2].split(/[\s\*\/\"\#\-\'\.\d]+/); category = 'MISC';
       for(i=0;i<words.length;i++){
         for(categoryVal in allCategories) {
           if(words[i].toLowerCase() in allCategories[categoryVal]) {
@@ -77,9 +77,10 @@ function drawOutput(lines){
   document.getElementById("output").innerHTML = "";
   var table = document.createElement("table");
   var splitup = {};
-  table.className = "table table-condensed table-hover";
+  table.className = "table table-condensed";
   for (i = 0; i < lines.length; i++) {
     var row = table.insertRow(-1);
+    row.className = lines[i][0];
     for (var j = 0; j < lines[i].length; j++) {
       var moneyCell = row.insertCell(-1);
       moneyCell.appendChild(document.createTextNode(lines[i][j]));
@@ -93,9 +94,10 @@ function drawChart(splitup) {
   var moneySeries = {type: "pie", showInLegend: true, toolTipContent: "{y} - #percent %", yValueFormatString: "$#.##"};
   var money = [];
   var total = 0;
-  for(var key in splitup) {
-    money.push({y: splitup[key], legendText: key, indexLabel: key});
+  for(var key in splitup)
     total = total + splitup[key];
+  for(var key in splitup) {
+    money.push({y: splitup[key], legendText: key, indexLabel: key + ' ' + (splitup[key]*100/total).toFixed(2) + ' %'});
   }
   moneySeries.dataPoints = money;
   data.push(moneySeries);

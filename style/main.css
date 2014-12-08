@@ -6,3 +6,32 @@
     color: #BBB;
 }
 
+.Food {
+  background: #ebcccc;
+}
+
+.Gas {
+  background: #d9edf7;
+}
+
+.Grocery {
+  background: #DFF0D8;
+}
+
+.Online {
+  background: #337AB7;
+}
+
+.Travel {
+  background: #FCF8E3;
+}
+
+.Utilities {
+  background: #F2DEDE;
+}
+.Apparel {
+  background: #5cb85c;
+}
+.Entertainment {
+  background: #f0ad4e;
+}
