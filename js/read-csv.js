@@ -92,15 +92,17 @@ function drawChart(splitup) {
   var data = [];
   var moneySeries = {type: "pie", showInLegend: true, toolTipContent: "{y} - #percent %", yValueFormatString: "$#.##"};
   var money = [];
+  var total = 0;
   for(var key in splitup) {
     money.push({y: splitup[key], legendText: key, indexLabel: key});
+    total = total + splitup[key];
   }
   moneySeries.dataPoints = money;
   data.push(moneySeries);
   var chart = new CanvasJS.Chart("chartContainer",
   {
     theme: "theme2",
-    title:{ text: "Where your money went?" },
+    title:{ text: "PickPocket" },
     data: data
 
   });
