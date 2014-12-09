@@ -63,7 +63,8 @@ function processData(csv) {
     }
   }
   drawOutput(lines);
-  drawChart(splitup);
+  //drawChart(splitup);
+  drawGoogleChart(splitup);
 }
 
 function errorHandler(evt) {
@@ -109,6 +110,18 @@ function drawChart(splitup) {
 
   });
   chart.render();
+}
+
+function drawGoogleChart(splitup) {
+  var splituparray = [];
+  splituparray.push(['Category', 'Amount'])
+  for(key in splitup) {
+    splituparray.push([key, splitup[key]]);
+  }
+  var data = google.visualization.arrayToDataTable(splituparray);
+  var options = { title: 'PickPocket',  };
+  var chart = new google.visualization.PieChart(document.getElementById('chartContainer'));
+  chart.draw(data, options);
 }
 
 function handleFileSelect(evt) {
